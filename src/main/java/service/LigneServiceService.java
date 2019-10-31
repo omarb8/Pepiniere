@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package Service;
 
 import entits.LigneService;
 import Iservice.ILigneService;
@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.Singleton;
+import fxml.Singleton;
 import entits.ObjetPanierService;
+import java.sql.Date;
 
 /**
  *
@@ -45,8 +46,8 @@ public LigneServiceService() {
         try {
             String req1="INSERT INTO `ligne_service`(`DateDebut`, `DateFin`,`IdUser`,`IdCommande`) VALUES (?,?,?,?)" ;
             PreparedStatement pstm = c.prepareStatement(req1,Statement.RETURN_GENERATED_KEYS);
-                    pstm.setString(1,ls.getDateDebut());
-                    pstm.setString(2,ls.getDateFin());
+                    pstm.setDate(1,new Date(ls.getDateDebut().getTime()));
+                    pstm.setDate(2,new Date(ls.getDateFin().getTime()));
                     pstm.setInt(3,ls.getIdUser().getId());
                     pstm.setInt(4,ls.getIdCommande().getId());
                     pstm.executeUpdate();                     
@@ -64,8 +65,8 @@ public LigneServiceService() {
         String req2="UPDATE ligne_service SET DateDebut=?,DateFin=? WHERE id =?" ; 
         try {
             PreparedStatement pstm = c.prepareStatement(req2);
-                    pstm.setString(1,ls.getDateDebut());
-                    pstm.setString(2,ls.getDateFin());
+                    pstm.setDate(1,new Date(ls.getDateDebut().getTime()));
+                    pstm.setDate(2,new Date(ls.getDateFin().getTime()));
                     pstm.setInt(3,ls.getId());
             pstm.executeUpdate();            
             
@@ -106,8 +107,8 @@ public LigneServiceService() {
           while (res.next()) { 
               ls = new entits.LigneService();
                       ls.setId( res.getInt("id"));
-                      ls.setDateDebut( res.getString("DateDebut") );
-                      ls.setDateFin(res.getString("DateFin"));   
+                      ls.setDateDebut( res.getDate("DateDebut") );
+                      ls.setDateFin(res.getDate("DateFin"));   
                       //p.setIdUser(res.get("idUser"));
               ligneservices.add(ls);
           }
@@ -137,8 +138,8 @@ public LigneServiceService() {
                       user.setId( res.getInt("u.id"));
                       user.setUsername(res.getString("u.username"));
                       user.setRoles(res.getString("u.roles"));
-                      ls.setDateDebut(res.getString("dateDebut"));
-                      ls.setDateFin(res.getString("dateFin"));
+                      ls.setDateDebut(res.getDate("dateDebut"));
+                      ls.setDateFin(res.getDate("dateFin"));
                       ls.setIdUser(user);
               getLigneService.add(ls);
           }
@@ -149,5 +150,31 @@ public LigneServiceService() {
         
      return getLigneService;
     }
+
+    @Override
+    public List<LigneService> getLigneServiceByUser(User user) {
+      List<LigneService> ligneservices = new ArrayList<>();
+      LigneService ls ;
+      String req4="select * from ligne_service where IdUser = "+user.getId();
+      //String req4 = "select  from  "
+      try {
+         
+         
+          ResultSet res=  ste.executeQuery(req4);
+          while (res.next()) { 
+              ls = new entits.LigneService();
+                      ls.setId( res.getInt("id"));
+                      ls.setDateDebut( res.getDate("DateDebut") );
+                      ls.setDateFin(res.getDate("DateFin"));   
+                      //p.setIdUser(res.get("idUser"));
+              ligneservices.add(ls);
+          }
+          
+      } catch (SQLException ex) {
+          System.out.println(ex.getMessage());
+      } 
+        
+     return ligneservices; 
     }
+}
 

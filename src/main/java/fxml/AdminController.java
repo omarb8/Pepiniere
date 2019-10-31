@@ -29,6 +29,7 @@ public class AdminController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
     @FXML
     private void deconnectee(ActionEvent event) {
         Parent frontPage = null; 
@@ -43,9 +44,78 @@ public class AdminController implements Initializable {
         window.setScene(frontPageScene);
         window.show();
     }
+     @FXML
+    private void gestionUtulisateurs(ActionEvent event) {
+        Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/GestionDesStaff.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+    @FXML
+    private void gestionEvent(ActionEvent event) {
+         Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/GestionEvenAdm.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+    @FXML
+    private void Compte(ActionEvent event) {
+         Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/CompteAdmin.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+    @FXML
+    private void CommantaireAd(ActionEvent event) {
+         Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/ForomAdmin.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+    @FXML
+    private void consulterReclamation(ActionEvent event) {
+         Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/GestionReclamation.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
 }

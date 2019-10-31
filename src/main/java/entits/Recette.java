@@ -28,7 +28,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Recette.findAll", query = "SELECT r FROM Recette r")})
 public class Recette implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -44,8 +44,16 @@ public class Recette implements Serializable {
     @Column(name = "type_rec")
     private String typeRec;
     @OneToMany(mappedBy = "idRecette")
-    private Collection<LigneRecette> ligneRecetteCollection;
+    private Collection<LignePack> ligneRecetteCollection;
+    private String imagerecette;
 
+        public String getImagerecette() {
+        return imagerecette;
+    }
+
+    public void setImagerecette(String imagerecette) {
+        this.imagerecette = imagerecette;
+    }
     public Recette() {
     }
 
@@ -53,11 +61,12 @@ public class Recette implements Serializable {
         this.id = id;
     }
 
-    public Recette(Integer id, String nomRec, String recDescription, String typeRec) {
+    public Recette(Integer id, String nomRec, String recDescription, String typeRec,String imagerecette) {
         this.id = id;
         this.nomRec = nomRec;
         this.recDescription = recDescription;
         this.typeRec = typeRec;
+        this.imagerecette = imagerecette;
     }
 
     public Integer getId() {
@@ -92,13 +101,14 @@ public class Recette implements Serializable {
         this.typeRec = typeRec;
     }
 
-    public Collection<LigneRecette> getLigneRecetteCollection() {
+    public Collection<LignePack> getLigneRecetteCollection() {
         return ligneRecetteCollection;
     }
 
-    public void setLigneRecetteCollection(Collection<LigneRecette> ligneRecetteCollection) {
+    public void setLigneRecetteCollection(Collection<LignePack> ligneRecetteCollection) {
         this.ligneRecetteCollection = ligneRecetteCollection;
     }
+    
 
     @Override
     public int hashCode() {
@@ -122,7 +132,14 @@ public class Recette implements Serializable {
 
     @Override
     public String toString() {
-        return "entits.Recette[ id=" + id + " ]";
+        return "Recette{" + "id=" + id + ", nomRec=" + nomRec + ", recDescription=" + recDescription + ", typeRec=" + typeRec + ", ligneRecetteCollection=" + ligneRecetteCollection + ", imagerecette=" + imagerecette + '}';
     }
-    
+
+    public Recette(String nomRec, String recDescription, String typeRec, String imagerecette) {
+        this.nomRec = nomRec;
+        this.recDescription = recDescription;
+        this.typeRec = typeRec;
+        this.imagerecette = imagerecette;
+    }
+
 }

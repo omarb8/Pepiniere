@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package Service;
 
 import entits.Commande;
 import java.sql.Connection;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.Singleton;
+import fxml.Singleton;
 import Iservice.ICommandeService;
 
 import entits.LigneCommande;
@@ -42,10 +42,11 @@ public CommandeService() {
     @Override
     public int creerCommande(Commande p) {
         try {
-            String req1="INSERT INTO `commande`(`date_validation`, `prix_total`) VALUES (?,?)" ;
+            String req1="INSERT INTO `commande`(`date_validation`, `prix_total`,`IdUser`) VALUES (?,?,?)" ;
             PreparedStatement pstm = c.prepareStatement(req1,Statement.RETURN_GENERATED_KEYS);
                     pstm.setString(1,p.getDateValidation());
                     pstm.setInt(2,p.getPrixTotal());
+                    pstm.setInt(3, p.getIdUser().getId());
                     pstm.executeUpdate();                     
                     ResultSet generatedKeys = pstm.getGeneratedKeys();
                     generatedKeys.next();

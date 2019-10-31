@@ -7,6 +7,7 @@ package entits;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import entits.ObjetPanierProduit;
+import entits.LigneCommande;
+import java.util.ArrayList;
+import entits.Produit;
 
 /**
  *
@@ -29,8 +34,11 @@ import javax.persistence.Table;
 @Table(name = "commande")
 @NamedQueries({
     @NamedQuery(name = "Commande.findAll", query = "SELECT c FROM Commande c")})
-public class Commande implements Serializable {
-
+  public class Commande implements Serializable {
+    ////////////////////////////////////////////////////
+    private List<LigneCommande> produits;
+    List<ObjetPanierProduit> listt  = new ArrayList<>();
+////////////////////////////////////////////////////////
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +50,7 @@ public class Commande implements Serializable {
     private String dateValidation;
     @Basic(optional = false)
     @Column(name = "prix_total")
-    private String prixTotal;
+    private Integer prixTotal;
     @JoinColumn(name = "idLivraison", referencedColumnName = "id")
     @OneToOne
     private Livraison idLivraison;
@@ -55,7 +63,9 @@ public class Commande implements Serializable {
     private Collection<Reclamation> reclamationCollection;
     @OneToMany(mappedBy = "idCommande")
     private Collection<LigneService> ligneServiceCollection;
-
+    
+     
+     
     public Commande() {
     }
 
@@ -63,7 +73,7 @@ public class Commande implements Serializable {
         this.id = id;
     }
 
-    public Commande(Integer id, String dateValidation, String prixTotal) {
+    public Commande(Integer id, String dateValidation, Integer prixTotal) {
         this.id = id;
         this.dateValidation = dateValidation;
         this.prixTotal = prixTotal;
@@ -85,12 +95,12 @@ public class Commande implements Serializable {
         this.dateValidation = dateValidation;
     }
 
-    public String getPrixTotal() {
+    public Integer getPrixTotal() {
         return prixTotal;
     }
 
-    public void setPrixTotal(String prixTotal) {
-        this.prixTotal = prixTotal;
+    public void setPrixTotal(Integer prixTotal) {
+        this.prixTotal = prixTotal ;
     }
 
     public Livraison getIdLivraison() {

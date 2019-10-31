@@ -114,7 +114,7 @@ public class FrontController implements Initializable {
     private void notreOffre(ActionEvent event) {
          Parent frontPage = null; 
         try {
-            frontPage = FXMLLoader.load(getClass().getResource("/fxml/NotreOffre.fxml"));
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/NosPacks.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -160,6 +160,51 @@ public class FrontController implements Initializable {
          Parent frontPage = null; 
         try {
             frontPage = FXMLLoader.load(getClass().getResource("/fxml/Forom.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+
+    @FXML
+    private void Recette(ActionEvent event) {
+         Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/Recette.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+
+    @FXML
+    private void gestedumois(ActionEvent event) {
+        Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/GesteFront.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+
+    @FXML
+    private void reclamation(ActionEvent event) {
+        Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/Reclamation.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

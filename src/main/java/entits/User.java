@@ -9,6 +9,7 @@ package entits;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javafx.scene.image.Image;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,13 +33,25 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
 public class User implements Serializable {
+    private String nom;
+    private String prenom;
+    private String telephone;
+    private Image photo;
+    private String img;
 
+    public String getImg() {
+        return img;
+    }
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
+    public void setImg(String img) {
+        this.img = img;
+    }
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
@@ -87,6 +100,96 @@ public class User implements Serializable {
     private Collection<LigneService> ligneServiceCollection;
 
     public User() {
+        
+    }
+
+    public User(String nom, String prenom, String telephone, String email, String password, String roles, String username, String usernameCanonical, String emailCanonical,int id ) {
+        this.id=id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.username = username;
+        this.usernameCanonical = usernameCanonical;
+        this.emailCanonical = emailCanonical;
+    }
+
+    public User( Integer id,String nom, String prenom,String email, String telephone,  String roles) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.id = id;
+        this.email = email;
+        this.roles = roles;
+    }
+
+    
+
+    public User(String nom, String prenom, String email, String password, String username) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+    }
+    
+
+    public User(String nom, String prenom, String telephone, String email, String password, String username ,String img ) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.img=img;
+        //Image image = new Image("/Images/Default.jpg");
+    }
+    public User(String nom, String prenom, String telephone, String email, String password, String username) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        
+        //Image image = new Image("/Images/Default.jpg");
+    }
+    
+    public User(String nom, String prenom, String telephone, String email, String password, String username,Image photo) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.photo= photo; 
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
     }
 
     public User(Integer id) {
@@ -102,6 +205,17 @@ public class User implements Serializable {
         this.usernameCanonical = usernameCanonical;
         this.emailCanonical = emailCanonical;
         this.enabled = enabled;
+    }
+
+    public User(String nom, String prenom, String telephone, Integer id, String email, String password, String roles, String username) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.username = username;
     }
 
     public Integer getId() {
@@ -166,6 +280,14 @@ public class User implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Image getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Image photo) {
+        this.photo = photo;
     }
 
     public String getSalt() {

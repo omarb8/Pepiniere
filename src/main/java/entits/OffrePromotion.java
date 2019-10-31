@@ -70,6 +70,29 @@ public class OffrePromotion implements Serializable {
         this.titre = titre;
     }
 
+    public OffrePromotion(double pourcentage, String dateDebut, String dateFin, String type, String titre) {
+        this.pourcentage = pourcentage;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.type = type;
+        this.titre = titre;
+    }
+
+    public OffrePromotion(Integer id, double pourcentage, String dateDebut, String dateFin) {
+        this.id = id;
+        this.pourcentage = pourcentage;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+    }
+
+    public OffrePromotion(double pourcentage, String dateDebut, String dateFin, String type) {
+        this.pourcentage = pourcentage;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.type = type;
+    }
+    
+
     public Integer getId() {
         return id;
     }
@@ -156,7 +179,8 @@ public class OffrePromotion implements Serializable {
 
     @Override
     public String toString() {
-        return "entits.OffrePromotion[ id=" + id + " ]";
+        return titre+"|"+"|"+pourcentage+"|"+dateDebut+"->"+dateFin;
     }
+
     
 }

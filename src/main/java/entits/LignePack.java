@@ -28,8 +28,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "LigneRecette.findAll", query = "SELECT l FROM LigneRecette l")})
 public class LignePack implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+    
+ private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -100,6 +100,10 @@ public class LignePack implements Serializable {
     public void setIdPack(PackDecoration idPack) {
         this.idPack = idPack;
     }
+    
+    public String getNomProd(){
+        return idProduit.getNomProd();
+    }
 
     @Override
     public int hashCode() {
@@ -146,7 +150,4 @@ public class LignePack implements Serializable {
     public String toString() {
         return "LignePack{" + "id=" + id + ", quantite=" + quantite + ", description=" + description + ", idProduit=" + idProduit + ", idPack=" + idPack + '}';
     }
-
-    
-    
 }

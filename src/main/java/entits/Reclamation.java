@@ -6,6 +6,8 @@
 package entits;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,33 +24,29 @@ import javax.persistence.Table;
  *
  * @author DELL
  */
-@Entity
-@Table(name = "reclamation")
-@NamedQueries({
-    @NamedQuery(name = "Reclamation.findAll", query = "SELECT r FROM Reclamation r")})
 public class Reclamation implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
+   
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "objet")
+ 
     private String objet;
-    @Basic(optional = false)
-    @Column(name = "contenue")
+  
     private String contenue;
-    @Basic(optional = false)
-    @Column(name = "date_recla")
-    private String dateRecla;
-    @JoinColumn(name = "IdCommande", referencedColumnName = "id")
-    @ManyToOne
-    private Commande idCommande;
-    @JoinColumn(name = "IdUser", referencedColumnName = "id")
-    @ManyToOne
-    private User idUser;
+  
+    private Date dateRecla;
+ 
+    private int idCommande;
+  
+    private int idUser;
+    private String etat_recla;
+
+    public String getEtat_recla() {
+        return etat_recla;
+    }
+
+    public void setEtat_recla(String etat_recla) {
+        this.etat_recla = etat_recla;
+    }
 
     public Reclamation() {
     }
@@ -57,11 +55,21 @@ public class Reclamation implements Serializable {
         this.id = id;
     }
 
-    public Reclamation(Integer id, String objet, String contenue, String dateRecla) {
+    public Reclamation(Integer id, String objet, String contenue, Date dateRecla) {
         this.id = id;
         this.objet = objet;
         this.contenue = contenue;
         this.dateRecla = dateRecla;
+        this.etat_recla = etat_recla;
+    }
+
+    public Reclamation(String objet, String contenue, Date dateRecla, int idCommande, int idUser, String etat_recla) {
+        this.objet = objet;
+        this.contenue = contenue;
+        this.dateRecla = dateRecla;
+        this.idCommande = idCommande;
+        this.idUser = idUser;
+        this.etat_recla = etat_recla;
     }
 
     public Integer getId() {
@@ -88,45 +96,67 @@ public class Reclamation implements Serializable {
         this.contenue = contenue;
     }
 
-    public String getDateRecla() {
+    public Date getDateRecla() {
         return dateRecla;
     }
 
-    public void setDateRecla(String dateRecla) {
+    public void setDateRecla(Date dateRecla) {
         this.dateRecla = dateRecla;
     }
 
-    public Commande getIdCommande() {
+    public int getIdCommande() {
         return idCommande;
     }
 
-    public void setIdCommande(Commande idCommande) {
+    public void setIdCommande(int idCommande) {
         this.idCommande = idCommande;
     }
 
-    public User getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(User idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Reclamation)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Reclamation other = (Reclamation) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Reclamation other = (Reclamation) obj;
+        if (this.idCommande != other.idCommande) {
+            return false;
+        }
+        if (this.idUser != other.idUser) {
+            return false;
+        }
+        if (!Objects.equals(this.objet, other.objet)) {
+            return false;
+        }
+        if (!Objects.equals(this.contenue, other.contenue)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateRecla, other.dateRecla)) {
+            return false;
+        }
+        if (!Objects.equals(this.etat_recla, other.etat_recla)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -134,7 +164,6 @@ public class Reclamation implements Serializable {
 
     @Override
     public String toString() {
-        return "entits.Reclamation[ id=" + id + " ]";
-    }
-    
+        return "Reclamation{" + "id=" + id + ", objet=" + objet + ", contenue=" + contenue + ", dateRecla=" + dateRecla + ", idCommande=" + idCommande + ", idUser=" + idUser + ", etat_recla=" + etat_recla + '}';
+}
 }

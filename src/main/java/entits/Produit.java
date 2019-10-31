@@ -5,20 +5,20 @@
  */
 package entits;
 
-import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+   import java.io.Serializable;
+   import java.util.Collection;
+   import javax.persistence.Basic;
+   import javax.persistence.Column;
+   import javax.persistence.Entity;
+   import javax.persistence.GeneratedValue;
+   import javax.persistence.GenerationType;
+   import javax.persistence.Id;
+   import javax.persistence.JoinColumn;
+   import javax.persistence.ManyToOne;
+   import javax.persistence.NamedQueries;
+   import javax.persistence.NamedQuery;
+   import javax.persistence.OneToMany;
+   import javax.persistence.Table;
 
 /**
  *
@@ -30,7 +30,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Produit.findAll", query = "SELECT p FROM Produit p")})
 public class Produit implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -55,17 +55,20 @@ public class Produit implements Serializable {
     @Column(name = "image")
     private String image;
     @JoinColumn(name = "IdCategorie", referencedColumnName = "id")
-    @ManyToOne
-    private Categorie idCategorie;
+  
+    private int idCategorie;
     @JoinColumn(name = "IdOffre", referencedColumnName = "id")
-    @ManyToOne
-    private OffrePromotion idOffre;
+   
+    private int idOffre;
     @OneToMany(mappedBy = "idProduit")
     private Collection<LigneCommande> ligneCommandeCollection;
     @OneToMany(mappedBy = "idProduit")
     private Collection<LigneRecette> ligneRecetteCollection;
     @OneToMany(mappedBy = "idProduit")
     private Collection<QuantiteDeco> quantiteDecoCollection;
+   
+    private OffrePromotion offre ;
+    
 
     public Produit() {
     }
@@ -82,6 +85,38 @@ public class Produit implements Serializable {
         this.quantite = quantite;
         this.image = image;
     }
+
+    public Produit(String nomProd, double prixProd, String prodDescription, int quantite, String image, int idCategorie) {
+        this.nomProd = nomProd;
+        this.prixProd = prixProd;
+        this.prodDescription = prodDescription;
+        this.quantite = quantite;
+        this.image = image;
+        this.idCategorie = idCategorie;
+    }
+    
+
+    public Produit(String nomProd, double prixProd, Double prixOffre, String prodDescription, int quantite, String image) {
+        this.nomProd = nomProd;
+        this.prixProd = prixProd;
+        this.prixOffre = prixOffre;
+        this.prodDescription = prodDescription;
+        this.quantite = quantite;
+        this.image = image;
+    }
+
+    public Produit(String nomProd, double prixProd, Double prixOffre, String prodDescription, int quantite, String image, int idCategorie, int idOffre) {
+        this.nomProd = nomProd;
+        this.prixProd = prixProd;
+        this.prixOffre = prixOffre;
+        this.prodDescription = prodDescription;
+        this.quantite = quantite;
+        this.image = image;
+        this.idCategorie = idCategorie;
+        this.idOffre = idOffre;
+    }
+    
+    
 
     public Integer getId() {
         return id;
@@ -139,21 +174,32 @@ public class Produit implements Serializable {
         this.image = image;
     }
 
-    public Categorie getIdCategorie() {
+    public int getIdCategorie() {
         return idCategorie;
     }
 
-    public void setIdCategorie(Categorie idCategorie) {
+    public void setIdCategorie(int idCategorie) {
         this.idCategorie = idCategorie;
     }
 
-    public OffrePromotion getIdOffre() {
+    public int getIdOffre() {
         return idOffre;
     }
 
-    public void setIdOffre(OffrePromotion idOffre) {
+    public void setIdOffre(int idOffre) {
         this.idOffre = idOffre;
     }
+
+    public OffrePromotion getOffre() {
+        return offre;
+    }
+
+    public void setOffre(OffrePromotion offre) {
+        this.offre = offre;
+    }
+    
+
+  
 
     public Collection<LigneCommande> getLigneCommandeCollection() {
         return ligneCommandeCollection;
@@ -201,7 +247,8 @@ public class Produit implements Serializable {
 
     @Override
     public String toString() {
-        return "entits.Produit[ id=" + id + " ]";
+        return "Produit{" + "id=" + id + ", nomProd=" + nomProd + ", prixProd=" + prixProd + ", prixOffre=" + prixOffre + ", prodDescription=" + prodDescription + ", quantite=" + quantite + ", image=" + image + ", idCategorie=" + idCategorie + ", idOffre=" + idOffre + ", ligneCommandeCollection=" + ligneCommandeCollection + ", ligneRecetteCollection=" + ligneRecetteCollection + ", quantiteDecoCollection=" + quantiteDecoCollection + ", offre=" + offre + '}';
     }
+
     
 }

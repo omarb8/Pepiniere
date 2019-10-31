@@ -46,15 +46,27 @@ public class Categorie implements Serializable {
     public Categorie() {
     }
 
+    public Categorie(String nomCat, String descriptionCat) {
+        this.nomCat = nomCat;
+        this.descriptionCat = descriptionCat;
+    }
+    
+    
+
     public Categorie(Integer id) {
         this.id = id;
     }
+    
 
     public Categorie(Integer id, String nomCat, String descriptionCat) {
         this.id = id;
         this.nomCat = nomCat;
         this.descriptionCat = descriptionCat;
     }
+    
+    
+    
+    
 
     public Integer getId() {
         return id;
@@ -110,7 +122,7 @@ public class Categorie implements Serializable {
 
     @Override
     public String toString() {
-        return "entits.Categorie[ id=" + id + " ]";
+        return nomCat;
     }
-    
+
 }

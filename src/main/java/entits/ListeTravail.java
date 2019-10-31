@@ -47,14 +47,48 @@ public class ListeTravail implements Serializable {
     private User idUser;
     @OneToMany(mappedBy = "idTravail")
     private Collection<AlbumPhoto> albumPhotoCollection;
-
+    private String image;
     public ListeTravail() {
+    }
+
+    public ListeTravail(String descriptionTravail, String dateTravail, User idUser, String image) {
+        this.descriptionTravail = descriptionTravail;
+        this.dateTravail = dateTravail;
+        this.idUser = idUser;
+        this.image = image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public ListeTravail(Integer id) {
         this.id = id;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public ListeTravail(Integer id, String descriptionTravail, String dateTravail, User idUser) {
+        this.id = id;
+        this.descriptionTravail = descriptionTravail;
+        this.dateTravail = dateTravail;
+        this.idUser = idUser;
+    }
+
+    public ListeTravail(String descriptionTravail, String dateTravail, User idUser) {
+        this.descriptionTravail = descriptionTravail;
+        this.dateTravail = dateTravail;
+        this.idUser = idUser;
+    }
+
+    public ListeTravail(String descriptionTravail, String dateTravail) {
+        this.descriptionTravail = descriptionTravail;
+        this.dateTravail = dateTravail;
+    }
+    
+    
     public ListeTravail(Integer id, String descriptionTravail, String dateTravail) {
         this.id = id;
         this.descriptionTravail = descriptionTravail;

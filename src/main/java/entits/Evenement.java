@@ -7,6 +7,7 @@ package entits;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,40 +31,24 @@ import javax.persistence.Table;
     @NamedQuery(name = "Evenement.findAll", query = "SELECT e FROM Evenement e")})
 public class Evenement implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Basic(optional = false)
-    @Column(name = "datedebut")
+      private int id;
     private String datedebut;
-    @Basic(optional = false)
-    @Column(name = "datefin")
     private String datefin;
-    @Basic(optional = false)
-    @Column(name = "description")
     private String description;
-    @Basic(optional = false)
-    @Column(name = "lieu")
     private String lieu;
-    @Basic(optional = false)
-    @Column(name = "nbr_participants")
     private int nbrParticipants;
-    @Basic(optional = false)
-    @Column(name = "image")
+    private int eveprix;
     private String image;
-    @OneToMany(mappedBy = "idEvenement")
-    private Collection<Participation> participationCollection;
-    @JoinColumn(name = "IdOffre", referencedColumnName = "id")
-    @ManyToOne
-    private OffrePromotion idOffre;
+    private int idOffre;
+    private double prix_offre ;
+    private OffrePromotion offre ; 
+    private String nom ;
+    
 
     public Evenement() {
     }
 
-    public Evenement(Integer id) {
+    public Evenement(int id) {
         this.id = id;
     }
 
@@ -77,7 +62,79 @@ public class Evenement implements Serializable {
         this.image = image;
     }
 
-    public Integer getId() {
+    public Evenement(int id, String datedebut, String datefin, String description, String lieu, int eveprix) {
+        this.id = id;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.description = description;
+        this.lieu = lieu;
+        this.eveprix = eveprix;
+    }
+
+    
+    
+    public Evenement(String datedebut, String datefin, String description, String lieu, int nbrParticipants, int eveprix, String image) {
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.description = description;
+        this.lieu = lieu;
+        this.nbrParticipants = nbrParticipants;
+        this.eveprix = eveprix;
+        this.image = image;
+    }
+    
+    
+    
+
+    public Evenement(String datedebut, String datefin, String description, String lieu, int eveprix) {
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.description = description;
+        this.lieu = lieu;
+        this.eveprix = eveprix;
+    }
+
+    public Evenement(String datedebut, String datefin, String description, String lieu, int nbrParticipants, int eveprix, String image, String nom) {
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.description = description;
+        this.lieu = lieu;
+        this.nbrParticipants = nbrParticipants;
+        this.eveprix = eveprix;
+        this.image = image;
+        this.nom = nom;
+    }
+
+    public Evenement(int id, String datedebut, String datefin, String description, String lieu, int nbrParticipants, int eveprix, String image, String nom) {
+        this.id = id;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.description = description;
+        this.lieu = lieu;
+        this.nbrParticipants = nbrParticipants;
+        this.eveprix = eveprix;
+        this.image = image;
+        this.nom = nom;
+    }
+
+   
+    
+    
+    
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    
+    
+    
+
+    public int getId() {
         return id;
     }
 
@@ -133,37 +190,85 @@ public class Evenement implements Serializable {
         this.image = image;
     }
 
-    public Collection<Participation> getParticipationCollection() {
-        return participationCollection;
+    public int getEveprix() {
+        return eveprix;
     }
 
-    public void setParticipationCollection(Collection<Participation> participationCollection) {
-        this.participationCollection = participationCollection;
+    public void setEveprix(int eveprix) {
+        this.eveprix = eveprix;
     }
 
-    public OffrePromotion getIdOffre() {
+    public int getIdOffre() {
         return idOffre;
     }
 
-    public void setIdOffre(OffrePromotion idOffre) {
+    public void setIdOffre(int idOffre) {
         this.idOffre = idOffre;
     }
 
+    public double getPrix_offre() {
+        return prix_offre;
+    }
+
+    public void setPrix_offre(double prix_offre) {
+        this.prix_offre = prix_offre;
+    }
+
+    public OffrePromotion getOffre() {
+        return offre;
+    }
+
+    public void setOffre(OffrePromotion offre) {
+        this.offre = offre;
+    }
+    
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Evenement)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Evenement other = (Evenement) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Evenement other = (Evenement) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.nbrParticipants != other.nbrParticipants) {
+            return false;
+        }
+        if (this.eveprix != other.eveprix) {
+            return false;
+        }
+        if (this.idOffre != other.idOffre) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.prix_offre) != Double.doubleToLongBits(other.prix_offre)) {
+            return false;
+        }
+        if (!Objects.equals(this.datedebut, other.datedebut)) {
+            return false;
+        }
+        if (!Objects.equals(this.datefin, other.datefin)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.lieu, other.lieu)) {
+            return false;
+        }
+        if (!Objects.equals(this.image, other.image)) {
             return false;
         }
         return true;
@@ -171,7 +276,7 @@ public class Evenement implements Serializable {
 
     @Override
     public String toString() {
-        return "entits.Evenement[ id=" + id + " ]";
+        return "Evenement{" + "id=" + id + ", datedebut=" + datedebut + ", datefin=" + datefin + ", description=" + description + ", lieu=" + lieu + ", nbrParticipants=" + nbrParticipants + ", eveprix=" + eveprix + ", image=" + image + ", idOffre=" + idOffre + ", prix_offre=" + prix_offre + '}';
     }
-    
+ 
 }

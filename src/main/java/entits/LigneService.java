@@ -6,6 +6,8 @@
 package entits;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,10 +38,10 @@ public class LigneService implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @Column(name = "DateDebut")
-    private String dateDebut;
+    private Date dateDebut;
     @Basic(optional = false)
     @Column(name = "DateFin")
-    private String dateFin;
+    private Date dateFin;
     @JoinColumn(name = "IdCommande", referencedColumnName = "id")
     @ManyToOne
     private Commande idCommande;
@@ -54,7 +56,7 @@ public class LigneService implements Serializable {
         this.id = id;
     }
 
-    public LigneService(Integer id, String dateDebut, String dateFin) {
+    public LigneService(Integer id, Date dateDebut, Date dateFin) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -68,19 +70,19 @@ public class LigneService implements Serializable {
         this.id = id;
     }
 
-    public String getDateDebut() {
+    public Date getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(String dateDebut) {
+    public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public String getDateFin() {
+    public Date getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(String dateFin) {
+    public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
 

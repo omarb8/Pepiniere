@@ -26,8 +26,18 @@ import javax.persistence.Table;
 @Table(name = "pack_decoration")
 @NamedQueries({
     @NamedQuery(name = "PackDecoration.findAll", query = "SELECT p FROM PackDecoration p")})
-public class PackDecoration implements Serializable {
+public class PackDecoration implements Serializable,Commandable {
+ private String image;
+    private String nom;
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    private String type;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +51,17 @@ public class PackDecoration implements Serializable {
     @Column(name = "prixP")
     private double prixP;
     @OneToMany(mappedBy = "idPack")
+    
     private Collection<QuantiteDeco> quantiteDecoCollection;
+   
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public PackDecoration() {
     }
@@ -50,10 +70,17 @@ public class PackDecoration implements Serializable {
         this.id = id;
     }
 
+    public PackDecoration(Integer id, String descriptionPack, double prixP,String image) {
+        this.id = id;
+        this.descriptionPack = descriptionPack;
+        this.prixP = prixP;
+        this.image=image;
+    }
     public PackDecoration(Integer id, String descriptionPack, double prixP) {
         this.id = id;
         this.descriptionPack = descriptionPack;
         this.prixP = prixP;
+        this.image=image;
     }
 
     public Integer getId() {
@@ -108,9 +135,39 @@ public class PackDecoration implements Serializable {
         return true;
     }
 
+ @Override
+    public int getIdObjet() {
+        return this.id;
+    }
+
     @Override
-    public String toString() {
-        return "entits.PackDecoration[ id=" + id + " ]";
+    public double getPrixTotale() {
+         return this.prixP;
+    }
+
+    @Override
+    public Integer getQuantite() {
+        return 1;
+    }
+
+    @Override
+    public String getType (){
+       return "pack";
+    }
+
+    @Override
+    public String getNom() {
+         return "Pack Decoration N°"+this.id;
+    }
+
+    @Override
+    public void setQuantite(int qte) {
+        
+    }
+
+    @Override
+    public String getDescription() {
+        return descriptionPack;
     }
     
 }

@@ -29,6 +29,10 @@ public class ExpertController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }   
     @FXML
     private void deconnectee(ActionEvent event) {
         Parent frontPage = null; 
@@ -43,9 +47,66 @@ public class ExpertController implements Initializable {
         window.setScene(frontPageScene);
         window.show();
     }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+
+    @FXML
+    private void GestionCompte(ActionEvent event) {
+        Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/CompteExpert.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+     @FXML
+    private void gestionProduit(ActionEvent event) {
+        Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/Categorie.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+    @FXML
+    private void gestionOffre(ActionEvent event) {
+        
+        Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/GestionOffre.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+    }
+    @FXML
+    private void recetteAction(ActionEvent event) {
+        
+        
+         Parent frontPage = null; 
+        try {
+            frontPage = FXMLLoader.load(getClass().getResource("/fxml/Gestionrecette.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene frontPageScene= new Scene(frontPage); 
+        //to get the stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(frontPageScene);
+        window.show();
+        
+    }
     
 }
